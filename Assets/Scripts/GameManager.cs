@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int BoxScore=0,highScore;
     public int factorBox=0;
     [SerializeField]GameObject[] RGBboxes;
+    public GameObject retryButton;
     GameObject BigBox,BlockBox;
     [SerializeReference]GameObject[] Boxes=new GameObject[5];
     [SerializeReference]TextMeshProUGUI scoreText;

@@ -18,4 +18,7 @@ public class MainScreen : MonoBehaviour
     public void StartGame(){
         SceneManager.LoadScene(1);
     }
+    public void RestartGame(){
+        SceneManager.LoadScene(1);
+    }
 }

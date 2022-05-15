@@ -25,13 +25,9 @@ public class Death : MonoBehaviour
             }
             gameManager.highScoreText.gameObject.SetActive(true);
             gameManager.highScoreText.text="HighScore:"+gameManager.highScore;
-            Time.timeScale=0;
-            StartCoroutine("gameOver",5);
-            
+            gameManager.retryButton.SetActive(true);
+            Time.timeScale=0;            
         }   
     }
-    IEnumerator gameOver(){
-        yield return new WaitForSecondsRealtime(3);
-        SceneManager.LoadScene(1);
-    }
+    
 }
