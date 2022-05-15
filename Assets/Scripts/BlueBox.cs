@@ -123,6 +123,7 @@ public class BlueBox : MonoBehaviour
         }
     }
     public void desBlue(){
+        gameManager.BoxScore+=GameObject.Find("BigC").transform.childCount;
         if(GameObject.Find("BigC").transform.childCount>1){
               Destroy(GameObject.Find("BigC"));  
         }

@@ -126,6 +126,7 @@ public class RedBox : MonoBehaviour
         }
     }
     public void desRed(){
+        gameManager.BoxScore+=GameObject.Find("BigC").transform.childCount;
         if(GameObject.Find("BigC").transform.childCount>1){
               Destroy(GameObject.Find("BigC"));  
         }

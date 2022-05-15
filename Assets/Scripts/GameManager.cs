@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
+    public int BoxScore=0,highScore;
     public int factorBox=0;
     [SerializeField]GameObject[] RGBboxes;
     GameObject BigBox;
+    [SerializeReference]TextMeshProUGUI scoreText;
     void Start()
     {
         BigBox=GameObject.Find("BigBox");
@@ -27,8 +30,8 @@ public class GameManager : MonoBehaviour
             else{
                 Time.timeScale=1;
             }
-            
         }
+        scoreText.text="Score:"+BoxScore;
     }
     void spawnBox(){
         float newPoint=1.1f*factorBox;

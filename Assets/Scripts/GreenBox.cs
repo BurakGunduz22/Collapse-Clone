@@ -127,6 +127,7 @@ public class GreenBox : MonoBehaviour
         }
     }
     public void desGreen(){
+        gameManager.BoxScore+=GameObject.Find("BigC").transform.childCount;
         if(GameObject.Find("BigC").transform.childCount>1){
               Destroy(GameObject.Find("BigC"));  
         }
