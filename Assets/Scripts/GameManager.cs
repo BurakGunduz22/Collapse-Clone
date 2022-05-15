@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         {
             startBox();
         }
-        InvokeRepeating("spawnBox",5,2f*Time.deltaTime);
+        InvokeRepeating("spawnBox",5,0.75f);
     }
 
     // Update is called once per frame
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
     }
     IEnumerator goBrr(){
-        yield return new WaitForSeconds(1.5f*Time.deltaTime);
+        yield return new WaitForSeconds(0.5f);
         BigBox.transform.position+=new Vector3(0,1.1f,0);
     }
     
