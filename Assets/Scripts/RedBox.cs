@@ -31,7 +31,7 @@ public class RedBox : MonoBehaviour
     public void isRedNear(){
         Debug.Log("Red");
         gameObject.tag="Red2";        
-        redBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1.25f,1.25f),90);
+        redBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1f,1f),45);
         numRed=0;
         numRed2=0;
         if(GameObject.Find("BigC")==null){
@@ -51,17 +51,22 @@ public class RedBox : MonoBehaviour
         {
             if(redBox[i].gameObject.CompareTag("Red")){
                redbox2[numRed2]=redBox[i];
+               redbox2[numRed2].transform.SetParent(GameObject.Find("BigC").transform,true);
                redbox2[numRed2].gameObject.GetComponent<RedBox>().isRedNearSeq();
                numRed2++;
             }
         }
-        gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
-        if(GameObject.Find("BigC").transform.childCount>2){
+        gameObject.tag="Red";
+        if(GameObject.Find("BigC").transform.childCount>1){
+            gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
             for (int i = 0; i < numRed2; i++)
             {
-                redbox2[i].GetComponent<SpriteRenderer>().color=new Color(1,0,0);
                 redbox2[i].transform.SetParent(GameObject.Find("BigC").transform,true);
                 redbox2[i].tag="Red";
+            }
+            for (int i = 0; i <GameObject.Find("BigC").transform.childCount; i++)
+            {
+                GameObject.Find("BigC").transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color=new Color(1,0,0);
             }
             this.gameObject.GetComponent<SpriteRenderer>().color=new Color(1,0,0);
             gameObject.tag="Red";
@@ -70,7 +75,7 @@ public class RedBox : MonoBehaviour
     public void isRedNearSeq(){
         Debug.Log("Red");
         gameObject.tag="Red2";        
-        redBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1.25f,1.25f),90);
+        redBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1f,1f),45);
         numRed=0;
         numRed2=0;
         for (int i = 0; i < redBox.Length; i++)
@@ -84,29 +89,27 @@ public class RedBox : MonoBehaviour
         for (int i = 0; i < redBox.Length; i++)
         {
             if(redBox[i].gameObject.CompareTag("Red")){
-               if(redBox[i].transform.parent==null){
-                    redbox2[numRed2]=redBox[i];
-                    redbox2[numRed2].gameObject.GetComponent<RedBox>().isRedNearSeq();
+               if(redBox[i].transform.parent==GameObject.Find("BigBox").transform){
+                    redbox2[numRed2]=redBox[i];        
                     redbox2[numRed2].transform.SetParent(GameObject.Find("BigC").transform,true);
+                    redbox2[numRed2].gameObject.GetComponent<RedBox>().isRedNearSeq();
                     numRed2++;
                }
             }
         }
-        gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
         if(numRed2>0){
+            gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
             for (int i = 0; i < numRed2; i++)
             {
-                redbox2[i].GetComponent<SpriteRenderer>().color=new Color(1,0,0);
                 redbox2[i].transform.SetParent(GameObject.Find("BigC").transform,true);
                 redbox2[i].tag="Red";
             }
-            gameObject.GetComponent<SpriteRenderer>().color=new Color(1,0,0);
             gameObject.tag="Red";
         }
     }
 
     public void RedExit(){
-        if(GameObject.Find("BigC").transform.childCount>2){
+        if(GameObject.Find("BigC").transform.childCount>0){
         GameObject[] BluesBox = new GameObject[GameObject.Find("BigC").transform.childCount];
             for (int i = 0; i < GameObject.Find("BigC").transform.childCount; i++)
                 {

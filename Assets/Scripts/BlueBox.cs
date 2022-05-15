@@ -31,7 +31,7 @@ public class BlueBox : MonoBehaviour
     public void isBlueNear(){
         Debug.Log("Blue");
         gameObject.tag="Blue2";        
-        blueBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1.25f,1.25f),90);
+        blueBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1f,1f),45);
         numBlue=0;
         numBlue2=0;
         if(GameObject.Find("BigC")==null){
@@ -51,17 +51,22 @@ public class BlueBox : MonoBehaviour
         {
             if(blueBox[i].gameObject.CompareTag("Blue")){
                bluebox2[numBlue2]=blueBox[i];
+               bluebox2[numBlue2].transform.SetParent(GameObject.Find("BigC").transform,true);
                bluebox2[numBlue2].gameObject.GetComponent<BlueBox>().isBlueNearSeq();
                numBlue2++;
             }
         }
-        gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
-        if(GameObject.Find("BigC").transform.childCount>2){
+        Debug.Log(GameObject.Find("BigC").transform.childCount);
+        gameObject.tag="Blue";
+        if(GameObject.Find("BigC").transform.childCount>1){
+            gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
             for (int i = 0; i < numBlue2; i++)
             {
-                bluebox2[i].GetComponent<SpriteRenderer>().color=new Color(0,0.454902f,1);
-                bluebox2[i].transform.SetParent(GameObject.Find("BigC").transform,true);
                 bluebox2[i].tag="Blue";
+            }
+            for (int i = 0; i <GameObject.Find("BigC").transform.childCount; i++)
+            {
+                GameObject.Find("BigC").transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color=new Color(0,0.454902f,1);
             }
             this.gameObject.GetComponent<SpriteRenderer>().color=new Color(0,0.454902f,1);
             gameObject.tag="Blue";
@@ -70,7 +75,7 @@ public class BlueBox : MonoBehaviour
     public void isBlueNearSeq(){
         Debug.Log("Blue");
         gameObject.tag="Blue2";        
-        blueBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1.25f,1.25f),90);
+        blueBox=Physics2D.OverlapBoxAll(transform.position,new Vector2(1f,1f),45);
         numBlue=0;
         numBlue2=0;
         for (int i = 0; i < blueBox.Length; i++)
@@ -84,29 +89,24 @@ public class BlueBox : MonoBehaviour
         for (int i = 0; i < blueBox.Length; i++)
         {
             if(blueBox[i].gameObject.CompareTag("Blue")){
-               if(blueBox[i].transform.parent==null){
+               if(blueBox[i].transform.parent=GameObject.Find("BigBox").transform){
                     bluebox2[numBlue2]=blueBox[i];
-                    bluebox2[numBlue2].gameObject.GetComponent<BlueBox>().isBlueNearSeq();
                     bluebox2[numBlue2].transform.SetParent(GameObject.Find("BigC").transform,true);
+                    bluebox2[numBlue2].gameObject.GetComponent<BlueBox>().isBlueNearSeq();
                     numBlue2++;
                }
             }
         }
-        gameObject.transform.SetParent(GameObject.Find("BigC").transform,true);
         if(numBlue2>0){
             for (int i = 0; i < numBlue2; i++)
             {
-                bluebox2[i].GetComponent<SpriteRenderer>().color=new Color(0,0.454902f,1);
-                bluebox2[i].transform.SetParent(GameObject.Find("BigC").transform,true);
                 bluebox2[i].tag="Blue";
             }
-            gameObject.GetComponent<SpriteRenderer>().color=new Color(0,0.454902f,1);
             gameObject.tag="Blue";
         }
     }
-
     public void blueExit(){
-        if(GameObject.Find("BigC").transform.childCount>2){
+        if(GameObject.Find("BigC").transform.childCount>0){
         GameObject[] BluesBox = new GameObject[GameObject.Find("BigC").transform.childCount];
             for (int i = 0; i < GameObject.Find("BigC").transform.childCount; i++)
             {

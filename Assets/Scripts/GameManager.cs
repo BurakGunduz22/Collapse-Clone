@@ -14,13 +14,21 @@ public class GameManager : MonoBehaviour
         {
             startBox();
         }
-        InvokeRepeating("spawnBox",5,2f);
+        InvokeRepeating("spawnBox",5,2f*Time.deltaTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(Time.timeScale==1){
+                Time.timeScale=0;
+            }
+            else{
+                Time.timeScale=1;
+            }
+            
+        }
     }
     void spawnBox(){
         float newPoint=1.1f*factorBox;
@@ -45,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
     }
     IEnumerator goBrr(){
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f*Time.deltaTime);
         BigBox.transform.position+=new Vector3(0,1.1f,0);
     }
     
