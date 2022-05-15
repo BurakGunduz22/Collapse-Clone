@@ -18,7 +18,9 @@ public class RedBox : MonoBehaviour
     
     }
     public void OnMouseEnter() {
-        isRedNear();
+        if(Time.timeScale==1&&gameObject.transform.parent==GameObject.Find("BigBox").transform){
+            isRedNear();  
+        }  
     }
     private void OnMouseOver() {
         if(Input.GetMouseButtonDown(0)){

@@ -19,9 +19,17 @@ public class Death : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject){
-            SceneManager.LoadScene(0);
-        }
-        PlayerPrefs.GetInt("BoxHighScore",gameManager.BoxScore);
-        PlayerPrefs.SetInt("BoxHighScore",gameManager.highScore);
+            if(gameManager.BoxScore>gameManager.highScore){
+            PlayerPrefs.SetInt("BoxHighScore",gameManager.BoxScore);
+            gameManager.highScore=PlayerPrefs.GetInt("BoxHighScore");
+            }
+            gameManager.highScoreText.gameObject.SetActive(true);
+            gameManager.highScoreText.text="HighScore:"+gameManager.highScore;
+            Time.timeScale=0;
+            Invoke("gameOver",5);
+        }   
+    }
+    void gameOver(){
+        SceneManager.LoadScene(1);
     }
 }

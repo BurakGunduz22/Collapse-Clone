@@ -18,7 +18,9 @@ public class GreenBox : MonoBehaviour
     
     }
     public void OnMouseEnter() {
-        isGreenNear();
+        if(Time.timeScale==1&&gameObject.transform.parent==GameObject.Find("BigBox").transform){
+            isGreenNear();  
+        }  
     }
     private void OnMouseOver() {
         if(Input.GetMouseButtonDown(0)){

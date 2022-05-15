@@ -8,16 +8,21 @@ public class GameManager : MonoBehaviour
     public int BoxScore=0,highScore;
     public int factorBox=0;
     [SerializeField]GameObject[] RGBboxes;
-    GameObject BigBox;
+    GameObject BigBox,BlockBox;
+    [SerializeReference]GameObject[] Boxes=new GameObject[5];
     [SerializeReference]TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
     void Start()
     {
+        Time.timeScale=1;
+        highScore=PlayerPrefs.GetInt("BoxHighScore");  
         BigBox=GameObject.Find("BigBox");
+        BlockBox=GameObject.Find("Block");
         for (int i = 0; i < 30; i++)
         {
             startBox();
         }
-        InvokeRepeating("spawnBox",5,0.75f);
+        InvokeRepeating("spawnBox",5,1f);
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class GameManager : MonoBehaviour
         float newPoint=1.1f*factorBox;
         Vector2 RGBspawnPoint=new Vector2(-2.2f+newPoint,-4.45f);
         int RandomBox=Random.Range(0,3);
-        Instantiate(RGBboxes[RandomBox],RGBspawnPoint,RGBboxes[RandomBox].transform.rotation,BigBox.transform);
+        Boxes[factorBox]=Instantiate(RGBboxes[RandomBox],RGBspawnPoint,RGBboxes[RandomBox].transform.rotation,BlockBox.transform);
         factorBox++;
         if(factorBox==5){
             StartCoroutine("goBrr");
@@ -57,6 +62,11 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator goBrr(){
         yield return new WaitForSeconds(0.5f);
+        BlockBox.transform.DetachChildren();
+        for (int i = 0; i < 5; i++)
+        {
+            Boxes[i].transform.SetParent(BigBox.transform,true);
+        }
         BigBox.transform.position+=new Vector3(0,1.1f,0);
     }
     

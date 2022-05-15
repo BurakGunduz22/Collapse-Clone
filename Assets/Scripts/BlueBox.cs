@@ -18,7 +18,9 @@ public class BlueBox : MonoBehaviour
     
     }
     public void OnMouseEnter() {
-        isBlueNear();
+        if(Time.timeScale==1&&gameObject.transform.parent==GameObject.Find("BigBox").transform){
+            isBlueNear();  
+        }  
     }
     private void OnMouseOver() {
         if(Input.GetMouseButtonDown(0)){
