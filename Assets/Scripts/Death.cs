@@ -26,10 +26,12 @@ public class Death : MonoBehaviour
             gameManager.highScoreText.gameObject.SetActive(true);
             gameManager.highScoreText.text="HighScore:"+gameManager.highScore;
             Time.timeScale=0;
-            Invoke("gameOver",5);
+            StartCoroutine("gameOver",5);
+            
         }   
     }
-    void gameOver(){
+    IEnumerator gameOver(){
+        yield return new WaitForSecondsRealtime(3);
         SceneManager.LoadScene(1);
     }
 }
