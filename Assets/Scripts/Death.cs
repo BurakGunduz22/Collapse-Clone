@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 public class Death : MonoBehaviour
 {
     GameManager gameManager;
@@ -26,7 +27,8 @@ public class Death : MonoBehaviour
             gameManager.highScoreText.gameObject.SetActive(true);
             gameManager.highScoreText.text="HighScore:"+gameManager.highScore;
             gameManager.retryButton.SetActive(true);
-            Time.timeScale=0;            
+            Time.timeScale=0;
+                                   
         }   
     }
     

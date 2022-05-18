@@ -118,7 +118,10 @@ public class BOX : MonoBehaviour
     public void boxDestroy(){
         gameManager.BoxScore+=GameObject.Find("BigC").transform.childCount;
         if(GameObject.Find("BigC").transform.childCount>1){
-              Destroy(GameObject.Find("BigC"));  
+              gameManager.boxPoint.position=transform.position;
+              gameManager.boxSum=0;
+              gameManager.boxColumnEmptyCaller();
+              Destroy(GameObject.Find("BigC"));
         }
     }
 }
