@@ -29,7 +29,9 @@ public class Death : MonoBehaviour
             gameManager.retryButton.SetActive(true);
             Time.timeScale=0;
                                    
-        }   
+        }
+        FindObjectOfType<AudioManager>().StopPlaying("Theme");
+        FindObjectOfType<AudioManager>().Play("death");
     }
     
 }
