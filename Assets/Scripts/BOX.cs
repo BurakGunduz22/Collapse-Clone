@@ -122,6 +122,7 @@ public class BOX : MonoBehaviour
               gameManager.boxSum=0;
               gameManager.boxColumnEmptyCaller();
               Destroy(GameObject.Find("BigC"));
+              FindObjectOfType<AudioManager>().Play("boxDestroy");
         }
     }
 }
